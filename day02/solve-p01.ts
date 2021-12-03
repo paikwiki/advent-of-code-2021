@@ -1,13 +1,13 @@
 import fs from "fs-extra";
 
-const getLine = async () => {
+const getLines = async () => {
   return await fs.readFile("./input.txt").then((res) => res.toString());
 };
 
 const run = async () => {
   let horizon = 0;
   let vertical = 0;
-  const result = (await getLine())
+  (await getLines())
     .split("\n")
     .map((line) => line.split(" "))
     .map<[string, number]>((pair) => [pair[0], parseInt(pair[1])])
