@@ -10,9 +10,8 @@ const run = async () => {
   const result = (await getLine())
     .split("\n")
     .map((line) => line.split(" "))
-    .map((pair) => [pair[0], pair[1]])
-    .map(([command, stepString]) => {
-      const step = parseInt(stepString);
+    .map<[string, number]>((pair) => [pair[0], parseInt(pair[1])])
+    .map(([command, step]) => {
       switch (command) {
         case "up":
           vertical -= step;
