@@ -2,43 +2,13 @@ import { getLines } from "./utils";
 
 type BingoBoard = { value: string; marked: boolean }[][];
 
-const bingoBoardTemplate = [
-  [
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-  ],
-  [
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-  ],
-  [
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-  ],
-  [
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-  ],
-  [
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-    { value: "0", marked: false },
-  ],
-];
+const initBingoRaw = () => {
+  const raw = [];
+  for (let idx = 0; idx < 5; idx++) {
+    raw[idx] = { value: "0", marked: false };
+  }
+  return raw;
+};
 
 const run = async () => {
   const [instruction, ...linesForBingoBoard] = await getLines(
@@ -50,6 +20,12 @@ const run = async () => {
 
   // init bingoBoards
   const bingoBoardCount = Math.floor(linesForBingoBoard.length / 5);
+
+  const bingoBoardTemplate: BingoBoard = [];
+  for (let rawIndex = 0; rawIndex < 5; rawIndex++) {
+    bingoBoardTemplate[rawIndex] = initBingoRaw();
+  }
+
   console.log("bingoBoardCount", bingoBoardCount);
 
   const bingoBoards: BingoBoard[] = [];
